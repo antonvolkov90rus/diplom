@@ -1,0 +1,259 @@
+### API для поставщиков
+
+### Регистрация пользователя
+
+POST {{baseUrl}}/user/register
+Content-Type: application/json
+{
+      "first_name": "Ivan",
+      "last_name": "Volkov",
+      "company": "Stolplit",
+      "position": "p1",
+      "email": "{{baseEmail}}",
+      "password": "{{password}}"
+}
+
+### Еще одна регистрация пользователя
+
+POST {{baseUrl}}/user/register
+Content-Type: application/json
+
+{
+      "first_name": "Igor",
+      "last_name": "Sumakov",
+      "company": "Invitro",
+      "position": "p2",
+      "email": "{{baseshopEmail}}",
+      "password": "{{password}}",
+      "type": "shop"
+}
+
+###Подтверждение регистрации пользователя
+POST {{baseUrl}}/user/register/confirm
+Content-Type: application/json
+
+{
+    "email": "{{baseEmail}}",
+    "token": "{{confirm_token}}"
+}
+
+###Подтверждение регистрации магазина-пользователя
+POST {{baseUrl}}/user/register/confirm
+Content-Type: application/json
+
+{
+    "email": "{{baseshopEmail}}",
+    "token": "{{confirm_token_shop}}"
+}
+
+###Авторизация пользователя
+
+POST {{baseUrl}}/user/login
+Content-Type: application/json
+
+{
+    "email": "{{baseEmail}}",
+    "password": "{{password}}"
+}
+
+###Авторизация магазина-пользователя
+
+POST {{baseUrl}}/user/login
+Content-Type: application/json
+
+{
+    "email": "{{baseshopEmail}}",
+    "password": "{{password}}"
+}
+
+
+###Сигнал на обновление прайса
+
+POST {{baseUrl}}/partner/update
+Content-Type: application/json
+Authorization: Token {{ access_shop_token }}
+
+{
+    "url": "http://partner-site.ru/files/price.yaml"
+}
+
+### Обновление прайс-листа
+
+POST {{baseUrl}}/partner/update
+Content-Type: application/json
+Authorization: Token {{access_shop_token}}
+
+{
+    "url": "https://raw.githubusercontent.com/netology-code/python-final-diplom/master/data/shop1.yaml"
+}
+
+
+
+### Статус поставщика
+
+GET {{baseUrl}}/partner/state
+Content-Type: application/json
+Authorization: Token {{ access_shop_token }}
+
+### Категории
+
+GET {{baseUrl}}/categories
+Content-Type: application/json
+Authorization: Token {{ access_token }}
+
+
+#### Включить/выключить заказы
+
+POST {{baseUrl}}/partner/state
+Content-Type: application/json
+Authorization: Token {{ access_shop_token }}
+
+{
+    "state": "on"
+}
+
+
+#### Получить информацию о товарах
+
+GET {{baseUrl}}/products
+Content-Type: application/json
+Authorization: Token {{ access_token }}
+
+#### Статус получения заказов пользователя
+
+GET {{baseUrl}}/order
+Content-Type: application/json
+Authorization: Token {{ access_token }}
+
+
+
+#### Наполнить корзину
+
+POST {{baseUrl}}/basket
+Content-Type: application/json
+Authorization: Token {{ access_token }}
+
+{
+"items": [
+        {
+            "product_info": "1",
+            "quantity": "2"
+        },
+        {
+            "product_info": "5",
+            "quantity": "1"
+        }
+    ]
+}
+
+
+#### Посмотреть корзину
+
+GET {{baseUrl}}/basket
+Content-Type: application/json
+Authorization: Token {{ access_token }}
+
+
+#### Изменить корзину
+
+PUT {{baseUrl}}/basket
+Content-Type: application/json
+Authorization: Token {{ access_token }}
+
+{
+"items": [
+        {
+            "id": "4",
+            "quantity": "2"
+        }
+    ]
+}
+
+
+#### Посмотреть корзину
+
+GET {{baseUrl}}/basket
+Content-Type: application/json
+Authorization: Token {{ access_token }}
+
+
+#### Удалить товар из корзины
+
+DELETE {{baseUrl}}/basket
+Content-Type: application/json
+Authorization: Token {{ access_token }}
+
+{
+"items": "6"
+}
+
+
+### Посмотреть контакты пользователя
+GET {{baseUrl}}/user/contact
+Authorization: Token {{ access_token }}
+
+### Задать контакты пользователя
+POST {{baseUrl}}/user/contact
+Authorization: Token {{ access_token }}
+Content-Type: application/json
+
+{
+    "city": "Serpuhov",
+    "street": "Polevay",
+    "house": "1",
+    "structure": "1",
+    "building": "0",
+    "apartment": "0",
+    "phone": "916-111-000"
+}
+
+### Обновление контактов пользователя
+PUT {{baseUrl}}/user/contact
+Authorization: Token {{ access_token }}
+Content-Type: application/json
+
+{
+    "city": "Alecsin",
+    "street": "Osennya",
+    "house": "3",
+    "structure": "2",
+    "building": "0",
+    "apartment": "0",
+    "phone": "926-000-000",
+    "id": "1"
+}
+
+
+### Очистить контакты пользователя
+DELETE {{baseUrl}}/user/contact
+Authorization: Token {{ access_token }}
+Content-Type: application/json
+
+{
+  "items" : "1"
+}
+
+
+### Разместить заказ
+
+POST {{baseUrl}}/order
+Authorization: Token {{access_token}}
+Content-Type:application/json
+
+{
+  "id":"1",
+  "contact" : "1"
+}
+
+#### Посмотреть заказы покупателя
+
+GET {{baseUrl}}/order
+Content-Type: application/json
+Authorization: Token {{ access_token }}
+
+
+### Посмотреть заказы
+
+GET {{baseUrl}}/partner/orders
+Authorization: Token {{ access_shop_token }}
+Content-Type:application/json
