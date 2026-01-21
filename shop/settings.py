@@ -7,8 +7,10 @@ load_dotenv()
 # Основные пути проекта
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 # Безопасная обработка SSL-заголовков
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 # Конфиденциальные данные и отладка
 SECRET_KEY = os.getenv("SECRET_KEY")
@@ -30,6 +32,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'drf_spectacular_sidecar',
     'social_django'
+    'drf_spectacular_sidecar'
 ]
 
 MIDDLEWARE = [
@@ -56,6 +59,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
             ],
@@ -106,6 +110,7 @@ STATIC_ROOT = BASE_DIR / "static/"  # Определяем каталог для
 # Модель пользователя
 AUTH_USER_MODEL = 'backend.User'
 
+
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("GOOGLE_CLIENT_ID")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
 
@@ -118,6 +123,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
+
 
 # Почта и уведомления
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
