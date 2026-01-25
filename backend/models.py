@@ -135,6 +135,7 @@ class ProductInfo(models.Model):
     quantity = models.PositiveIntegerField(verbose_name='Количество')
     price = models.PositiveIntegerField(verbose_name='Цена')
     price_rrc = models.PositiveIntegerField(verbose_name='Рекомендуемая розничная цена')
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = 'Информация о продукте'

@@ -17,8 +17,12 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 ALLOWED_HOSTS = ['*']
 
+# Активация библиотеки Baton
+ADMIN_SITE = 'baton.sites.baton_admin_site'
+
 # Приложения и middleware
 INSTALLED_APPS = [
+    'baton',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
