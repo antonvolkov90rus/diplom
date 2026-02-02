@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'social_django',
     'drf_spectacular_sidecar',
+    'silk',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
+    'silk.middleware.SilkyMiddleware',
     ]
 
 # Роутер и шаблонизатор
@@ -75,10 +77,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
-            ],
+                ],
         },
     },
 ]
@@ -214,6 +215,14 @@ CACHALOT_ENABLED = True
 CACHEOPS_REDIS = CACHES["default"]["LOCATION"]
 CACHALOT_CACHE = 'default'
 CACHALOT_TIMEOUT = 60*60  # Время жизни кеша - 1 час
+
+# Конфигурация SILK
+SILKY_AUTHENTICATION = True
+SILKY_AUTHORISATION = True
+SILKY_INTERCEPT_PERCENTAGE = 100
+SILKY_MAX_REQUEST_BODY_SIZE = -1
+SILKY_META = False
+SILKY_PYTHON_PROFILER = True
 
 # Стандартное авто-поле модели
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
