@@ -1,4 +1,5 @@
 import os
+import rollbar
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -11,7 +12,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Безопасная обработка SSL-заголовков
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-
 # Конфиденциальные данные и отладка
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
@@ -19,6 +19,18 @@ ALLOWED_HOSTS = ['*']
 
 # Активация библиотеки Baton
 ADMIN_SITE = 'baton.sites.baton_admin_site'
+
+ROLLBAR_ACCESS_TOKEN = os.getenv("ROLLBAR_ACCESS_TOKEN")
+ROLLBAR = {
+    'access_token': ROLLBAR_ACCESS_TOKEN,
+    'environment': 'production' if DEBUG else 'development',
+    'root': BASE_DIR.as_posix(),
+    'capture_ip': True,
+    'enabled': True,
+}
+
+# Инициализация Rollbar
+rollbar.init(**ROLLBAR)
 
 # Приложения и middleware
 INSTALLED_APPS = [
@@ -48,7 +60,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
-]
+    ]
 
 # Роутер и шаблонизатор
 ROOT_URLCONF = 'shop.urls'

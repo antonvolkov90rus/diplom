@@ -510,3 +510,4 @@ class ProductInfoView(viewsets.ModelViewSet):
         serializer = ProductInfoSerializer(queryset, many=True)
 
         return Response(serializer.data)
+
