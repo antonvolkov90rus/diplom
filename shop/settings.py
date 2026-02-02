@@ -23,6 +23,7 @@ ADMIN_SITE = 'baton.sites.baton_admin_site'
 # Приложения и middleware
 INSTALLED_APPS = [
     'baton',
+    'easy_thumbnails',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -109,6 +110,16 @@ USE_TZ = True
 # Управление статическими файлами
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "static/"  # Определяем каталог для статических файлов
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+THUMBNAIL_BASEDIR = 'thumbnails'  # папка внутри MEDIA_ROOT для миниатюр
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'small': {'size': (80, 80), 'crop': True},
+        'medium': {'size': (200, 200), 'crop': True},
+    }
+}
 
 # Модель пользователя
 AUTH_USER_MODEL = 'backend.User'

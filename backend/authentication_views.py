@@ -35,13 +35,13 @@ class ConfirmAccount(APIView):
     def post(self, request, *args, **kwargs):
         serializer = ConfirmEmailTokenSerializer(data=request.data)
         if serializer.is_valid():
-            token = serializer.validated_data['key']
+            token = serializer.validated_data['token']
             email = serializer.validated_data['email']
-            user_token = ConfirmEmailToken.objects.filter(key=token, user__email=email).first()
-            if user_token:
-                user_token.user.is_active = True
-                user_token.user.save()
-                user_token.delete()
+            token_obj= ConfirmEmailToken.objects.filter(token=token, user__email=email).first()
+            if token_obj:
+                token_obj.user.is_active = True
+                token_obj.user.save()
+                token_obj.delete()
                 return JsonResponse({'Status': True})
             else:
                 return JsonResponse({'Status': False, 'Errors': 'Неправильно указан токен или email'})

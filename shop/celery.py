@@ -1,6 +1,7 @@
 import os
 from celery import Celery
 
+
 # Установка DJANGO_SETTINGS_MODULE для использования настроек Django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "shop.settings")
 

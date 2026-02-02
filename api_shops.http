@@ -12,7 +12,6 @@ Content-Type: application/json
       "email": "{{baseEmail}}",
       "password": "{{password}}"
 }
-
 ### Еще одна регистрация пользователя
 
 POST {{baseUrl}}/user/register

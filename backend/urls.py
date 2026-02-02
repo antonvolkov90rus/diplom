@@ -1,12 +1,11 @@
 from django.urls import path, include
 from django_rest_passwordreset.views import reset_password_request_token, reset_password_confirm
-
 from backend.views import PartnerUpdate, OrderView, RegisterAccount, LoginAccount, CategoryView, ShopView, \
     BasketView,\
     AccountDetails, ContactView, ProductInfoView, PartnerState, PartnerOrders, ConfirmAccount
-
-
 from rest_framework.routers import DefaultRouter
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 def_router = DefaultRouter()
@@ -32,3 +31,6 @@ urlpatterns += [
     path('order', OrderView.as_view(), name='order'),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

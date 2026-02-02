@@ -22,7 +22,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'last_name', 'email', 'company', 'position', 'contacts', 'type')
+        fields = ('id', 'first_name', 'last_name', 'email', 'company', 'position', 'contacts',)
         read_only_fields = ('id',)
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -115,13 +115,13 @@ class ConfirmEmailTokenSerializer(serializers.Serializer):
     Сериализатор для подтверждения email-пользователя.
     """
     email = serializers.EmailField(required=True)
-    key = serializers.CharField(required=True)
+    token = serializers.CharField(required=True)
 
     def validate(self, attrs):
         email = attrs.get('email')
-        key = attrs.get('key')
+        token = attrs.get('token')
         try:
-            token = ConfirmEmailToken.objects.get(user__email=email, key=key)
+            token = ConfirmEmailToken.objects.get(user__email=email, token=token)
             token.user.is_active = True  # Активируем пользователя
             token.user.save()
             token.delete()  # Удаляем использованный токен

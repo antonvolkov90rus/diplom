@@ -16,12 +16,10 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from yaml import load as load_yaml, Loader
-
 from backend.models import Shop, Category, Product, Parameter, ProductParameter, Order, OrderItem, \
     Contact, ConfirmEmailToken, ProductInfo
 from backend.serializers import UserSerializer, CategorySerializer, ShopSerializer, \
     OrderItemSerializer, OrderSerializer, ContactSerializer, ProductInfoSerializer
-
 from django.dispatch import receiver
 from django_rest_passwordreset.signals import reset_password_token_created
 from backend.tasks import send_email
@@ -80,7 +78,7 @@ class ConfirmAccount(APIView):
     def post(self, request, *args, **kwargs):
         if {'email', 'token'}.issubset(request.data):
             token_obj = ConfirmEmailToken.objects.filter(user__email=request.data['email'],
-                                                         key=request.data['token']).first()
+                                                         token=request.data['token']).first()
             if token_obj:
                 token_obj.user.is_active = True
                 token_obj.user.save()

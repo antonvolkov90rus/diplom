@@ -1,0 +1,7 @@
+{% load thumbnail %}
+
+<!-- Показываем изображение продукта -->
+<img src="{% thumbnail object.image "product_thumb" %}" alt="{{ object.name }}">
+
+<!-- Показываем аватар пользователя -->
+<img src="{% thumbnail request.user.avatar "avatar_thumb" %}" alt="Аватар {{ request.user.username }}">
