@@ -67,7 +67,7 @@ ROOT_URLCONF = 'shop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # Удобный синтаксис для новых версий Python
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -191,12 +191,29 @@ SPECTACULAR_SETTINGS = {
     'TITLE': 'Backend Shop API',
     'DESCRIPTION': 'API for shops',
     'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': True,  # Включаем документацию API
+    'SERVE_INCLUDE_SCHEMA': True,
     'SCHEMA_PATH_PREFIX': '/api/v1/',
     'SWAGGER_UI_DIST': 'SIDECAR',
     'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
     'REDOC_DIST': 'SIDECAR',
 }
+
+# Настройки кэширования (используется Redis)
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://localhost:6379/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        },
+    },
+}
+
+# Настройки расширения Cachalot для оптимизации запросов
+CACHALOT_ENABLED = True
+CACHEOPS_REDIS = CACHES["default"]["LOCATION"]
+CACHALOT_CACHE = 'default'
+CACHALOT_TIMEOUT = 60*60  # Время жизни кеша - 1 час
 
 # Стандартное авто-поле модели
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
