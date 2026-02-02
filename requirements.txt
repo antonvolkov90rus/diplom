@@ -24,6 +24,7 @@ django-baton==5.1.0
 django-cachalot==2.9.0
 django-redis==6.0.0
 django-rest-passwordreset==1.5.0
+django-silk==5.4.3
 djangorestframework==3.16.1
 drf-spectacular==0.29.0
 drf-spectacular-sidecar==2026.1.1
@@ -32,6 +33,7 @@ easy-thumbnails==2.10.1
 fastjsonschema==2.21.2
 filelock==3.9.0
 findpython==0.7.1
+gprof2dot==2025.4.14
 h11==0.16.0
 html5lib==1.1
 httpcore==1.0.9
